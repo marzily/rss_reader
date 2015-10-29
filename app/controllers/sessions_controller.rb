@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    # redirect_to user_links_path(user_id: current_user.id) if current_user
+    redirect_to news_index_path if current_user
   end
 
   def create

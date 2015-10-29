@@ -15,10 +15,11 @@ RSpec.describe "landing/login page", type: :feature do
 
   scenario "landing page has form to log in" do
     expect(page).to have_css("form")
-  #   fill_in "Email",                 with: "margie@email.com"
-  #   fill_in "Password",              with: "halloween"
-  #   fill_in "Password confirmation", with: "halloween"
-  #   click_button "Sign Up"
+
+    within "form" do
+      expect(page).to have_content "Email"
+      expect(page).to have_content "Password"
+    end
   end
 
   scenario "user sees error message if log in info is invalid" do
@@ -34,5 +35,14 @@ RSpec.describe "landing/login page", type: :feature do
 
     click_link "Sign up"
     expect(current_path).to eq new_user_path
+  end
+
+  scenario "on successful login, user is redirected to news feed" do
+    fill_in "Email",                 with: "margie@email.com"
+    fill_in "Password",              with: "halloween"
+    click_button "Log In"
+
+    expect(current_path).to eq news_index_path
+    expect(page).to have_content "Latest News"
   end
 end

@@ -26,13 +26,4 @@ RSpec.describe "user sign up page", type: :feature do
 
     expect(page).to have_content "Password is too short (minimum is 8 characters)"
   end
-
-  scenario "same user cannot sign up twice" do
-    fill_in "Email",                 with: "margie@email.com"
-    fill_in "Password",              with: "helloworld"
-    fill_in "Password confirmation", with: "helloworld"
-    click_button "Sign Up"
-
-    expect(page).to have_content "Email has already been taken"
-  end
 end
