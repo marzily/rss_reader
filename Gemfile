@@ -20,6 +20,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 gem 'rails_12factor', group: :production
