@@ -45,4 +45,11 @@ RSpec.describe "landing/login page", type: :feature do
     expect(current_path).to eq news_index_path
     expect(page).to have_content "Latest News"
   end
+
+  scenario "user is redirected to news feed if they are already signed in" do
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(User.last)
+    visit root_path
+    
+    expect(current_path).to eq news_index_path
+  end
 end
