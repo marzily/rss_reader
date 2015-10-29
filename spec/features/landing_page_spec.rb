@@ -22,7 +22,7 @@ RSpec.describe "landing/login page", type: :feature do
     end
   end
 
-  scenario "user sees error message if log in info is invalid" do
+  scenario "user sees error message if login info is invalid" do
     fill_in "Email",                 with: "margie@email.com"
     fill_in "Password",              with: "hello"
     click_button "Log In"
@@ -49,7 +49,7 @@ RSpec.describe "landing/login page", type: :feature do
   scenario "user is redirected to news feed if they are already signed in" do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(User.last)
     visit root_path
-    
+
     expect(current_path).to eq news_index_path
   end
 end
