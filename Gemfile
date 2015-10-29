@@ -11,9 +11,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'puma'
 gem "figaro"
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
   gem 'byebug'
@@ -22,6 +20,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 gem 'rails_12factor', group: :production
