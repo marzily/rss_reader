@@ -3,6 +3,7 @@
 <% if flash[:notice] %>
   <%= flash[:notice]  %>
 <% end %>
+
 <br>
 
 <%= form_for(:session, url: login_path) do |f| %>
