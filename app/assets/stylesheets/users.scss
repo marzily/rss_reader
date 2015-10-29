@@ -1,3 +1,17 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.errors {
+  display: inline-block;
+  text-align: left;
+}
+
+table {
+  margin: auto;
+}
+
+td {
+  text-align: left;
+  padding: 5px;
+}
+
+input {
+  float: right;
+}

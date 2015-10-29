@@ -1,14 +1,38 @@
-<h1>Create New User</h1>
+<h2>Create New User</h2>
 
+<div class="errors">
+  <% unless @user.errors.empty? %>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
 
-
+<br>
+<br>
 
 <%= form_for @user do |f| %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <%= f.label :password %>
-  <%= f.text_area :password %>
-  <%= f.label :password_confirmation %>
-  <%= f.text_area :password_confirmation %>
-  <%= f.submit "Create User" %>
+  <table>
+    <tr>
+      <td><%= f.label :email %></td>
+      <td><%= f.text_field :email %></td>
+    </tr>
+
+    <tr>
+      <td><%= f.label :password %></td>
+      <td><%= f.password_field :password %></td>
+    </tr>
+
+    <tr>
+      <td><%= f.label :password_confirmation %></td>
+      <td><%= f.password_field :password_confirmation %></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td><%= f.submit "Sign Up" %></td>
+    </tr>
+  </table>
 <% end %>

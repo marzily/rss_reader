@@ -9,7 +9,6 @@ class UsersController < ApplicationController
       flash[:message] = "Thanks for signing up!"
       # redirect_to admin_user_path(@user)
     else
-      # flash[:notice] = @user.errors.full_messages.join
       render :new
     end
   end
