@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) {
-    User.new(email: "margie@email.com",
-             password: "password",
+    User.new(email:                 "margie@email.com",
+             password:              "password",
              password_confirmation: "password")
   }
 
@@ -19,8 +19,8 @@ RSpec.describe User, type: :model do
 
   scenario "user is invalid if email is not unique" do
     user.save
-    user2 = User.new(email: "margie@email.com",
-                     password: "password",
+    user2 = User.new(email:                 "margie@email.com",
+                     password:              "password",
                      password_confirmation: "password")
 
     expect(user2).to_not be_valid
