@@ -3,20 +3,14 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = Article.add_user_id(article_params, current_user)
 
-    if @article.save
-      flash[:message] = "Thanks for signing up!"
-      redirect_to articles_path
-    else
-      render :new
-    end
+    render nothing: true if @article.save
   end
 
   private
 
     def article_params
-      params.require(:article).permit(:title, :password, :password_confirmation)
+      params.require(:article).permit(:title, :url)
     end
-
 end

@@ -1,10 +1,10 @@
 function getNews() {
   $.ajax({
-    url: "http://api.nytimes.com/svc/news/v3/content/nyt/all?api-key=<%= ENV['nytimes_key'] %>",
-    type: "GET",
+    url: 'http://api.nytimes.com/svc/news/v3/content/nyt/all?api-key=<%= ENV["nytimes_key"] %>',
+    type: 'GET',
     success: function(articles) {
       rssFeed(articles);
-      // console.log(articles["results"]);
+      // console.log(articles['results']);
     },
     error: function(message){
       console.error(message);
@@ -13,30 +13,54 @@ function getNews() {
 }
 
 function rssFeed(articles) {
-  articles["results"].forEach(function(article) {
-    var articleID = extractTitle(article);
-    $(".feed").append("<p id=" + articleID + "><a href=" + article["url"] + ">" + article["title"] +
-                      "</a> <span class='star'>&#9734;</span></p>");
+  articles['results'].forEach(function(article) {
+    var articleClass = extractTitle(article);
+    $('.feed').append('<p class=' + articleClass + '><a href=' + article['url'] + '>' + article['title'] +
+                      '</a> <span class=' + articleClass + '>&#9734;</span></p>');
+    favorite(articleClass);
   });
-
-  favorite();
 }
 
 function extractTitle(article) {
-  return article["url"].match(/.*\/(.*)\./)[1];
+  var url = article['url'];
+
+  if (url.substr(url.length - 5) === '.html') {
+    return url.match(/.*\/(.*)\./)[1];
+  } else if (url.substr(url.length - 1) === '/') {
+    return url.match(/.*\/(.*)\//)[1];
+  } else {
+    return url.match(/.*\/(.*)$/)[1];
+  }
 }
 
-function favorite() {
-  $( ".star" ).on("click", function() {
-    var id = $(this).parents().attr('id');
-    code = toggleFavorite("#" + id);
+function favorite(articleClass) {
+  var tag = '.' + articleClass + ' span';
+
+  $(tag).on('click', function() {
+    var star = $(this).html();
+    code = toggleFavorite(star);
     $(this).html(code);
   });
 }
 
-function toggleFavorite(id) {
-  return $(id).children(".star").html() === "☆" ? "&#9733;" : "&#9734;";
+function toggleFavorite(star) {
+  return star === '☆' ? '&#9733;' : '&#9734;';
 }
+
+// function postArticle() {
+//   $.ajax({
+//     url: 'http://api.nytimes.com/svc/news/v3/content/nyt/all?api-key=<%= ENV['nytimes_key'] %>',
+//     type: 'GET',
+//     success: function(articles) {
+//       rssFeed(articles);
+//       // console.log(articles['results']);
+//     },
+//     error: function(message){
+//       console.error(message);
+//     }
+//   });
+// }
+
 
 $(document).ready(function() {
   getNews();

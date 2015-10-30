@@ -9,7 +9,7 @@ RSpec.describe Article, type: :model do
 
   let(:article) do
     Article.new(title: "Consumer Spending Posts Smallest Gain in 8 Months",
-                url: "http://www.nytimes.com/2015/10/31/business/economy/consumer-spending-posts-smallest-gain-in-8-months.html?_r=0",
+                url: "http://www.nytimes.com/2015/10/31/business/economy/consumer-spending-posts-smallest-gain-in-8-months.html",
                 user_id: user.id)
   end
 
@@ -33,5 +33,13 @@ RSpec.describe Article, type: :model do
     article.user_id = nil
 
     expect(article).to_not be_valid
+  end
+
+  scenario "articles can be created from controller params" do
+    params = { title: "The Link Between Parenting and Leadership",
+               url: "http://www.nytimes.com/2015/10/31/business/dealbook/the-link-between-parenting-and-leadership.html" }
+    article2 = Article.add_user_id(params, user)
+
+    expect(article2).to be_valid
   end
 end
