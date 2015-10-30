@@ -8,7 +8,8 @@ RSpec.describe Article, type: :model do
   end
 
   let(:article) do
-    Article.new(title: "Dentists give toothbrushes out on Halloween",
+    Article.new(title: "Consumer Spending Posts Smallest Gain in 8 Months",
+                url: "http://www.nytimes.com/2015/10/31/business/economy/consumer-spending-posts-smallest-gain-in-8-months.html?_r=0",
                 user_id: user.id)
   end
 
@@ -22,9 +23,15 @@ RSpec.describe Article, type: :model do
     expect(article).to_not be_valid
   end
 
+  scenario "article is invalid without a title" do
+    article.url = nil
+
+    expect(article).to_not be_valid
+  end
+
   scenario "article is invalid without a user id" do
     article.user_id = nil
-    
+
     expect(article).to_not be_valid
   end
 end

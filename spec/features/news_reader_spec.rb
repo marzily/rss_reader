@@ -13,6 +13,7 @@ RSpec.describe "news reader", type: :feature, js: true do
   scenario "it has a header and a title" do
     expect(page).to have_content "NY Times RSS Reader"
     expect(page).to have_content "Latest News"
+
   end
 
   scenario "it displays the latest headlines" do
