@@ -22,6 +22,7 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'capybara'
   gem 'launchy'
+  gem 'poltergeist'
 end
 
 gem 'rails_12factor', group: :production
