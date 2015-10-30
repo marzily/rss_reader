@@ -5,6 +5,7 @@ RSpec.describe "landing/login page", type: :feature do
     User.create(email:                 "margie@email.com",
                 password:              "halloween",
                 password_confirmation: "halloween")
+                
     visit root_path
   end
 

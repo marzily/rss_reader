@@ -1,13 +1,20 @@
 function news() {
   $.ajax({
-    url: "http://api.nytimes.com/svc/news/v3/content/nyt/all?api-key=" + <%= ENV["nytimes_key"] %>,
+    url: "http://api.nytimes.com/svc/news/v3/content/nyt/all?api-key=<%= ENV['nytimes_key'] %>",
     type: "GET",
-    success: function(news_data) {
-      console.log("success!");
+    success: function(articles) {
+      rssFeed(articles);
+      // console.log(articles["results"][0]);
     },
     error: function(message){
       console.error(message);
     }
+  });
+}
+
+function rssFeed(articles) {
+  articles["results"].forEach(function(article) {
+    $(".feed").append("<p><a href=" + article["url"] + ">" + article["title"] + "</a></p>")
   });
 }
 
