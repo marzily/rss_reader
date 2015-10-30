@@ -7,7 +7,7 @@ RSpec.describe "news reader", type: :feature do
                 password_confirmation: "halloween")
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(User.last)
-    visit news_index_path
+    visit articles_path
   end
 
   scenario "it has a header and a title" do

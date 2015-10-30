@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
-      redirect_to news_index_path
+      redirect_to articles_path
     else
       flash[:notice] = "Invalid login."
       render :new

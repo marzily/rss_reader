@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:message] = "Thanks for signing up!"
-      redirect_to news_index_path
+      redirect_to articles_path
     else
       render :new
     end

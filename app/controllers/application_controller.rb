@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect
-    redirect_to news_index_path if current_user
+    redirect_to articles_path if current_user
   end
 end

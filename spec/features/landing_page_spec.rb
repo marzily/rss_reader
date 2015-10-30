@@ -5,7 +5,7 @@ RSpec.describe "landing/login page", type: :feature do
     User.create(email:                 "margie@email.com",
                 password:              "halloween",
                 password_confirmation: "halloween")
-                
+
     visit root_path
   end
 
@@ -43,7 +43,7 @@ RSpec.describe "landing/login page", type: :feature do
     fill_in "Password",              with: "halloween"
     click_button "Log In"
 
-    expect(current_path).to eq news_index_path
+    expect(current_path).to eq articles_path
     expect(page).to have_content "Latest News"
   end
 
@@ -51,6 +51,6 @@ RSpec.describe "landing/login page", type: :feature do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(User.last)
     visit root_path
 
-    expect(current_path).to eq news_index_path
+    expect(current_path).to eq articles_path
   end
 end

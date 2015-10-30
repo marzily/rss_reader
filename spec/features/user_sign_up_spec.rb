@@ -34,7 +34,7 @@ RSpec.describe "user sign up page", type: :feature do
     fill_in "Password confirmation", with: "halloween"
     click_button "Sign Up"
 
-    expect(current_path).to eq news_index_path
+    expect(current_path).to eq articles_path
     expect(page).to have_content "Latest News"
   end
 
@@ -49,7 +49,7 @@ RSpec.describe "user sign up page", type: :feature do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
       visit new_user_path
 
-      expect(current_path).to eq news_index_path
+      expect(current_path).to eq articles_path
     end
   end
 end
