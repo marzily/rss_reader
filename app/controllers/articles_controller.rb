@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :redirect, only: [:index]
-  
+
   def index
   end
 

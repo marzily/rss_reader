@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'test/index'
-
   root 'sessions#new'
 
   post    '/login', to: 'sessions#create'
