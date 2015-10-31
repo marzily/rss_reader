@@ -14,7 +14,21 @@
  *= require_self
  */
 
- body {
-    font-family: Courier;
-    text-align: center;
-  }
+body {
+  font-family: Courier;
+  text-align: center;
+}
+
+#header h1 {
+  float:left;
+}
+
+#header form {
+  float: right;
+  margin: 20px;
+  margin-top: 28px;
+}
+
+#header hr {
+  clear:both;
+}

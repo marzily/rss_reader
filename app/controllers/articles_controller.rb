@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  before_action :redirect, only: [:index]
+  
   def index
   end
 
@@ -21,5 +23,9 @@ class ArticlesController < ApplicationController
 
     def article_params
       params.require(:article).permit(:title, :url)
+    end
+
+    def redirect
+      redirect_to root_path unless current_user
     end
 end
