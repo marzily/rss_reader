@@ -4,7 +4,6 @@ function getNews() {
     type: 'GET',
     success: function (articles) {
       rssFeed(articles);
-      // console.log(articles['results']);
     },
     error: function (message){
       console.error(message);
@@ -14,10 +13,10 @@ function getNews() {
 
 function rssFeed(articles) {
   articles['results'].forEach(function(article) {
-    var articleClass = extractTitle(article);
-    $('.feed').append('<p class=' + articleClass + '><a href=' + article['url'] + '>' + article['title'] +
-                      '</a> <span class=' + articleClass + '>&#9734;</span></p>');
-    favorite(article, articleClass);
+    var articleID = extractTitle(article);
+    $('#feed').append('<p id="' + articleID + '"><a href="' + article['url'] + '">' + article['title'] +
+                      '</a> <span id="' + articleID + '-star">&#9734;</span></p>');
+    favorite(article, articleID);
   });
 }
 
@@ -33,37 +32,58 @@ function extractTitle(article) {
   }
 }
 
-function favorite(article, articleClass) {
-  var tag = '.' + articleClass + ' span';
+function favorite(article, articleID) {
+  var tag = '#' + articleID + '-star';
 
   $(tag).on('click', function() {
-    postArticle(article);
-
     var star = $(this).html();
-    code = toggleFavorite(star);
-    $(this).html(code);
+
+    if (star === '☆') {
+      postArticle(article, articleID);
+      $(this).html('&#9733;');
+    } else {
+      deleteArticle(tag);
+      $(this).html('&#9734;');
+    }
   });
 }
 
-function toggleFavorite(star) {
-  return star === '☆' ? '&#9733;' : '&#9734;';
-}
-
-function postArticle(article) {
+function postArticle(articleInfo, articleID) {
   $.ajax({
     url: '/articles',
     type: 'POST',
-    data: { article: { title: article["title"] ,
-                       url: article["url"] } },
-    success: function(title) {
-      console.log(title);
-    },
+    data: { article: { title: articleInfo["title"],
+                       url:   articleInfo["url"] } },
+   success: function(db_article) {
+     addIDNumToHTML(db_article, articleID);
+   },
     error: function(message) {
       console.error(message);
     }
   });
 }
 
+function addIDNumToHTML(db_article, articleID) {
+  var id = db_article['id'];
+  var tag = '#' + articleID;
+  $(tag).attr('id', articleID + ' ' + id.toString());
+}
+
+function deleteArticle(tag) {
+  var ids = $(tag).parents().attr('id').split(' ');
+
+  $.ajax({
+    url: '/articles/' + ids[1],
+    type: 'DELETE',
+    success: function() {
+      // debugger;
+      // $(tag).parents().attr('id', ids[0]);
+    },
+    error: function(message) {
+      console.error(message);
+    }
+  });
+}
 
 $(document).ready(function() {
   getNews();

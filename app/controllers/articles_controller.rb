@@ -10,6 +10,13 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def destroy
+    article = Article.find(params[:id])
+    article.destroy
+
+    render nothing: true
+  end
+
   private
 
     def article_params
