@@ -4,6 +4,10 @@ class ArticlesController < ApplicationController
   def index
   end
 
+  def favorite
+
+  end
+
   def create
     @article = Article.new_with_uid(article_params, current_user)
 

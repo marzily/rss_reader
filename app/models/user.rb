@@ -11,4 +11,8 @@ class User < ActiveRecord::Base
   def starred_urls
     articles.pluck(:id, :url).to_json
   end
+
+  def sorted_articles
+    articles.reverse
+  end
 end

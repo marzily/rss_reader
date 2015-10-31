@@ -1,0 +1,7 @@
+<div id="navbar">
+  <h1>NY Times RSS Reader</h1>
+  <% if current_user %>
+    <%= button_to "Log Out", logout_path, method: "delete" %>
+  <% end %>
+  <hr>
+</div>
