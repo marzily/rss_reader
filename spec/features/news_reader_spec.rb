@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "news reader", type: :feature, js: true do
+RSpec.describe "news reader", type: :feature do
   before(:each) do
     User.create(email:                 "margie@email.com",
                 password:              "halloween",

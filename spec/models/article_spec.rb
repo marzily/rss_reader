@@ -23,7 +23,7 @@ RSpec.describe Article, type: :model do
     expect(article).to_not be_valid
   end
 
-  scenario "article is invalid without a title" do
+  scenario "article is invalid without a url" do
     article.url = nil
 
     expect(article).to_not be_valid
