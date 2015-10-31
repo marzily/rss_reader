@@ -76,8 +76,7 @@ function deleteArticle(tag) {
     url: '/articles/' + ids[1],
     type: 'DELETE',
     success: function() {
-      // debugger;
-      // $(tag).parents().attr('id', ids[0]);
+      $(tag).closest('p').attr('id', ids[0]);
     },
     error: function(message) {
       console.error(message);
