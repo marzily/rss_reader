@@ -13,12 +13,12 @@ function getNews() {
 
 function rssFeed(articles) {
   articles['results'].forEach(function(article) {
-  var idNum = checkFavorited(article["url"]);
-  var star = idNum ? "&#9733;" : "&#9734;"
+    var idNum = checkFavorited(article["url"]);
+    var star = idNum ? "&#9733;" : "&#9734;"
 
-  var articleID = extractTitle(article);
-  $('#feed').append('<p id="' + articleID + ' ' + idNum + '"><a href="' + article['url'] + '">' + article['title'] +
-                    '</a> <span id="' + articleID + '-star">' + star + '</span></p>');
+    var articleID = extractTitle(article);
+    $('#feed').append('<p id="' + articleID + ' ' + idNum + '"><a href="' + article['url'] + '">' + article['title'] +
+                      '</a> <span id="' + articleID + '-star">' + star + '</span></p>');
 
     favorite(article, articleID);
   });
@@ -96,7 +96,7 @@ function checkFavorited(url) {
     if (article[1] === url) {
       idNum = article[0];
     }
-  })
+  });
 
   return idNum;
 }
