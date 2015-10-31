@@ -1,12 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :redirect, only: [:index]
-
-  def index
-  end
-
-  def favorite
-
-  end
+  before_action :redirect, only: [:index, :favorite]
 
   def create
     @article = Article.new_with_uid(article_params, current_user)
