@@ -5,9 +5,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+
     if @user.save
-      flash[:message] = "Thanks for signing up!"
-      # redirect_to admin_user_path(@user)
+      session[:user_id] = @user.id
+      redirect_to articles_path
     else
       render :new
     end

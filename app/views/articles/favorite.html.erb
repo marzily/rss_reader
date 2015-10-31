@@ -1,0 +1,13 @@
+<h1>Favorite Articles</h1>
+
+<%= link_to "RSS Feed", articles_path %>
+<br>
+<br>
+
+<div id="favorites">
+  <% current_user.sorted_articles.each do |article| %>
+    <p id="<%= article.html_title %> <%= article.id %>">
+      <a href="<%= article.url %>"><%= article.title %></a>
+    </p>
+  <% end %>
+</div>

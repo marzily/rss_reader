@@ -1,13 +1,10 @@
 class SessionsController < ApplicationController
-  def new
-    # redirect_to user_links_path(user_id: current_user.id) if current_user
-  end
-
   def create
     user = User.find_by(email: params[:session][:email])
+
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
-      # redirect_to user_links_path(user_id: user.id)
+      redirect_to articles_path
     else
       flash[:notice] = "Invalid login."
       render :new
@@ -16,6 +13,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session.clear
-    redirect_to login_path
+    redirect_to root_path
   end
 end

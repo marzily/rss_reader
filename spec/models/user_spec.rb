@@ -49,4 +49,8 @@ RSpec.describe User, type: :model do
 
     expect(user).to_not be_valid
   end
+
+  scenario "user has favorite articles" do
+    expect(user).to respond_to(:articles)
+  end
 end

@@ -1,0 +1,10 @@
+<h1>Latest News</h1>
+
+<%= link_to "Favorite", favorite_path, id: "favorite" %>
+<br>
+<br>
+
+<div id="feed"></div>
+
+<%= content_tag :div, id: "starred", data: { articles: current_user.starred_urls } do %>
+<% end %>

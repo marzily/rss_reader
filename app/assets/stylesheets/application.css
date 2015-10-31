@@ -14,7 +14,22 @@
  *= require_self
  */
 
- body {
-    font-family: Courier;
-    text-align: center;
-  }
+body {
+  font-family: Courier;
+  text-align: center;
+}
+
+#navbar h1 {
+  margin-left: 10px;
+  float:left;
+}
+
+#navbar form {
+  float: right;
+  margin-top: 37px;
+  margin-right: 10px;
+}
+
+#navbar hr {
+  clear:both;
+}
