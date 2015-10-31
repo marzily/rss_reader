@@ -2,6 +2,7 @@ function getNews() {
   $.ajax({
     url: 'https://api.nytimes.com/svc/news/v3/content/nyt/all?api-key=<%= ENV["nytimes_key"] %>',
     type: 'GET',
+    dataType: 'json',
     success: function (articles) {
       rssFeed(articles);
     },
