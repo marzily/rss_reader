@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
                               message: "Must be a valid email address." }
 
   validates :password, :password_confirmation, length: { minimum: 8 }
+
+  def starred_urls
+    articles.pluck(:id, :url).to_json
+  end
 end

@@ -1,2 +1,5 @@
 <h1>Latest News</h1>
 <div id="feed"></div>
+
+<%= content_tag :div, id: "starred", data: { articles: current_user.starred_urls } do %>
+<% end %>
