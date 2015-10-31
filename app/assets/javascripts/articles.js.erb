@@ -2,11 +2,11 @@ function getNews() {
   $.ajax({
     url: 'http://api.nytimes.com/svc/news/v3/content/nyt/all?api-key=<%= ENV["nytimes_key"] %>',
     type: 'GET',
-    success: function(articles) {
+    success: function (articles) {
       rssFeed(articles);
       // console.log(articles['results']);
     },
-    error: function(message){
+    error: function (message){
       console.error(message);
     }
   });
@@ -17,7 +17,7 @@ function rssFeed(articles) {
     var articleClass = extractTitle(article);
     $('.feed').append('<p class=' + articleClass + '><a href=' + article['url'] + '>' + article['title'] +
                       '</a> <span class=' + articleClass + '>&#9734;</span></p>');
-    favorite(articleClass);
+    favorite(article, articleClass);
   });
 }
 
@@ -33,10 +33,12 @@ function extractTitle(article) {
   }
 }
 
-function favorite(articleClass) {
+function favorite(article, articleClass) {
   var tag = '.' + articleClass + ' span';
 
   $(tag).on('click', function() {
+    postArticle(article);
+
     var star = $(this).html();
     code = toggleFavorite(star);
     $(this).html(code);
@@ -47,19 +49,20 @@ function toggleFavorite(star) {
   return star === '☆' ? '&#9733;' : '&#9734;';
 }
 
-// function postArticle() {
-//   $.ajax({
-//     url: 'http://api.nytimes.com/svc/news/v3/content/nyt/all?api-key=<%= ENV['nytimes_key'] %>',
-//     type: 'GET',
-//     success: function(articles) {
-//       rssFeed(articles);
-//       // console.log(articles['results']);
-//     },
-//     error: function(message){
-//       console.error(message);
-//     }
-//   });
-// }
+function postArticle(article) {
+  $.ajax({
+    url: '/articles',
+    type: 'POST',
+    data: { article: { title: article["title"] ,
+                       url: article["url"] } },
+    success: function(title) {
+      console.log(title);
+    },
+    error: function(message) {
+      console.error(message);
+    }
+  });
+}
 
 
 $(document).ready(function() {

@@ -3,9 +3,11 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.add_user_id(article_params, current_user)
+    @article = Article.new_with_uid(article_params, current_user)
 
-    render nothing: true if @article.save
+    if @article.save
+      render json: @article
+    end
   end
 
   private

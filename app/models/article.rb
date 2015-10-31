@@ -3,7 +3,7 @@ class Article < ActiveRecord::Base
 
   validates :title, :url, :user_id, presence: true
 
-  def self.add_user_id(params, user)
+  def self.new_with_uid(params, user)
     full_params = params.merge(user_id: user.id)
     new(full_params)
   end
