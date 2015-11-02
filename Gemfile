@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'puma'
 gem "figaro"
 gem 'bcrypt', '~> 3.1.7'
+gem "jquery-turbolinks"
 
 group :development, :test do
   gem 'byebug'
